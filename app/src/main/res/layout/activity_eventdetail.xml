@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Club"
+    android:id="@+id/clubtitle"
+    android:layout_gravity="center_horizontal"
+    android:layout_below="@+id/eventname"
+    android:layout_toLeftOf="@+id/eventname"
+    android:layout_toStartOf="@+id/eventname"
+    android:layout_marginRight="23dp"
+    android:layout_marginEnd="23dp" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Event Name"
+    android:id="@+id/eventname"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Details"
+    android:id="@+id/detailtitle"
+    android:layout_below="@+id/club"
+    android:layout_alignLeft="@+id/clubtitle"
+    android:layout_alignStart="@+id/clubtitle" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Details"
+    android:id="@+id/details"
+    android:layout_below="@+id/detailtitle"
+    android:layout_alignLeft="@+id/detailtitle"
+    android:layout_alignStart="@+id/detailtitle" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="club"
+    android:id="@+id/club"
+    android:layout_below="@+id/clubtitle"
+    android:layout_alignLeft="@+id/detailtitle"
+    android:layout_alignStart="@+id/detailtitle" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Date"
+    android:id="@+id/datetitle"
+    android:layout_below="@+id/details"
+    android:layout_alignLeft="@+id/details"
+    android:layout_alignStart="@+id/details" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="date"
+    android:id="@+id/date"
+    android:layout_below="@+id/datetitle"
+    android:layout_alignLeft="@+id/datetitle"
+    android:layout_alignStart="@+id/datetitle" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Time"
+    android:id="@+id/time1"
+    android:layout_below="@+id/timetitle"
+    android:layout_alignLeft="@+id/timetitle"
+    android:layout_alignStart="@+id/timetitle" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Place"
+    android:id="@+id/placetitle"
+    android:layout_below="@+id/time1"
+    android:layout_alignLeft="@+id/date"
+    android:layout_alignStart="@+id/date" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Time"
+    android:id="@+id/timetitle"
+    android:layout_below="@+id/date"
+    android:layout_alignLeft="@+id/date"
+    android:layout_alignStart="@+id/date" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Place"
+    android:id="@+id/place"
+    android:layout_below="@+id/placetitle"
+    android:layout_alignLeft="@+id/placetitle"
+    android:layout_alignStart="@+id/placetitle" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Set Reminder"
+    android:id="@+id/reminder"
+    android:layout_below="@+id/place"
+    android:layout_alignRight="@+id/eventname"
+    android:layout_alignEnd="@+id/eventname"
+    android:layout_marginTop="119dp" />
+</RelativeLayout>
