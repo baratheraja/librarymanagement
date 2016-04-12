@@ -126,7 +126,7 @@ public class LoginActivity extends ActionBarActivity {
                 String username = (String)arg0[0];
                 String password = (String)arg0[1];
 
-                String link="http://192.168.43.15/inceg/login.php";
+                String link="http://192.168.43.126/inceg/login.php";
                 //String link="http://stackoverflow.com";
                 String data  = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
                 data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");

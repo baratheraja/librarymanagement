@@ -6,12 +6,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Club"
-    android:id="@+id/clubtitle"
+    android:text="Title"
+    android:id="@+id/title"
     android:layout_gravity="center_horizontal"
-    android:layout_below="@+id/eventname"
-    android:layout_toLeftOf="@+id/eventname"
-    android:layout_toStartOf="@+id/eventname"
+    android:layout_below="@+id/bookname"
+    android:layout_toLeftOf="@+id/bookname"
+    android:layout_toStartOf="@+id/bookname"
     android:layout_marginRight="23dp"
     android:layout_marginEnd="23dp" />
 
@@ -19,8 +19,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Event Name"
-    android:id="@+id/eventname"
+    android:text="Book Name"
+    android:id="@+id/bookname"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true" />
 
@@ -28,94 +28,75 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Details"
-    android:id="@+id/detailtitle"
-    android:layout_below="@+id/club"
-    android:layout_alignLeft="@+id/clubtitle"
-    android:layout_alignStart="@+id/clubtitle" />
+    android:text="Author"
+    android:id="@+id/author"
+    android:layout_below="@+id/book_title"
+    android:layout_alignLeft="@+id/title"
+    android:layout_alignStart="@+id/title" />
 
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Details"
-    android:id="@+id/details"
-    android:layout_below="@+id/detailtitle"
-    android:layout_alignLeft="@+id/detailtitle"
-    android:layout_alignStart="@+id/detailtitle" />
+    android:text="Author"
+    android:id="@+id/book_author"
+    android:layout_below="@+id/author"
+    android:layout_alignLeft="@+id/author"
+    android:layout_alignStart="@+id/author" />
 
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="club"
-    android:id="@+id/club"
-    android:layout_below="@+id/clubtitle"
-    android:layout_alignLeft="@+id/detailtitle"
-    android:layout_alignStart="@+id/detailtitle" />
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Date"
-    android:id="@+id/datetitle"
-    android:layout_below="@+id/details"
-    android:layout_alignLeft="@+id/details"
-    android:layout_alignStart="@+id/details" />
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="date"
-    android:id="@+id/date"
-    android:layout_below="@+id/datetitle"
-    android:layout_alignLeft="@+id/datetitle"
-    android:layout_alignStart="@+id/datetitle" />
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Time"
-    android:id="@+id/time1"
-    android:layout_below="@+id/timetitle"
-    android:layout_alignLeft="@+id/timetitle"
-    android:layout_alignStart="@+id/timetitle" />
+    android:text="title"
+    android:id="@+id/book_title"
+    android:layout_below="@+id/title"
+    android:layout_alignLeft="@+id/author"
+    android:layout_alignStart="@+id/author" />
 
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Place"
-    android:id="@+id/placetitle"
-    android:layout_below="@+id/time1"
-    android:layout_alignLeft="@+id/date"
-    android:layout_alignStart="@+id/date" />
+    android:text="About"
+    android:id="@+id/about"
+    android:layout_below="@+id/book_author"
+    android:layout_alignLeft="@+id/book_author"
+    android:layout_alignStart="@+id/book_author" />
 
 <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="about"
+    android:id="@+id/book_about"
+    android:layout_below="@+id/about"
+    android:layout_alignLeft="@+id/about"
+    android:layout_alignStart="@+id/about" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Available"
+    android:id="@+id/book_available"
+    android:layout_below="@+id/available"
+    android:layout_alignLeft="@+id/available"
+    android:layout_alignStart="@+id/available" />
+
+    <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Time"
-    android:id="@+id/timetitle"
-    android:layout_below="@+id/date"
-    android:layout_alignLeft="@+id/date"
-    android:layout_alignStart="@+id/date" />
+    android:text="Available"
+    android:id="@+id/available"
+    android:layout_below="@+id/book_about"
+    android:layout_alignLeft="@+id/book_about"
+    android:layout_alignStart="@+id/book_about" />
 
-<TextView
+    <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Place"
-    android:id="@+id/place"
-    android:layout_below="@+id/placetitle"
-    android:layout_alignLeft="@+id/placetitle"
-    android:layout_alignStart="@+id/placetitle" />
-
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Set Reminder"
-    android:id="@+id/reminder"
-    android:layout_below="@+id/place"
-    android:layout_alignRight="@+id/eventname"
-    android:layout_alignEnd="@+id/eventname"
-    android:layout_marginTop="119dp" />
+    android:text="Block this book"
+    android:id="@+id/block"
+    android:layout_alignRight="@+id/bookname"
+    android:layout_alignEnd="@+id/bookname"
+    android:layout_marginTop="119dp"
+    android:layout_below="@+id/book_available" />
 </RelativeLayout>

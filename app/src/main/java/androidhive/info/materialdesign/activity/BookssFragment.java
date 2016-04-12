@@ -21,19 +21,19 @@ import java.util.Calendar;
 
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 
-public class EventsFragment extends Fragment implements View.OnClickListener {
+public class BookssFragment extends Fragment implements View.OnClickListener {
 
     Button cButton;
     Button tButton,dButton;
-    static MaterialEditText title,about,venue,date,time;
-    Event eventData;
+    static MaterialEditText title,about,author,stock,given;
+    Book bookData;
     DbOperation dbOperation;
     private View view;
     static int h,m,yr,mt,dy;
-    public EventsFragment() {
+    public BookssFragment() {
 
     }
 
@@ -49,19 +49,19 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_friends, container, false);
 
-        date=(MaterialEditText) view.findViewById(R.id.txtIsbn);
+        stock=(MaterialEditText) view.findViewById(R.id.txtStock);
         title = (MaterialEditText) view.findViewById(R.id.txtTitle);
         about = (MaterialEditText) view.findViewById(R.id.txtAbout);
-        venue = (MaterialEditText) view.findViewById(R.id.txtVenue);
-        time = (MaterialEditText) view.findViewById(R.id.tvtime);
+        author = (MaterialEditText) view.findViewById(R.id.txtAuthor);
+        given = (MaterialEditText) view.findViewById(R.id.txtGiven);
 
         cButton = (Button) view.findViewById(R.id.btnSubmit);
         cButton.setOnClickListener(this);
        // tButton = (Button) view.findViewById(R.id.button2);
         //dButton = (Button) view.findViewById(R.id.button1);
 
-        //Listener for time
-        time.setOnClickListener(new View.OnClickListener() {
+        //Listener for available
+        /*time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new TimePickerFragment();
@@ -70,7 +70,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         });
 
 
-        //listener for date
+        //listener for about
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,19 +79,19 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 
             }
 
-        });
+        });*/
         return view;
     }
 
     @Override
     public void onClick(View v) {
         title.getText().toString();
-      //  eventData = new Event(title.getText().toString(),about.getText().toString(),venue.getText().toString(),
-        //        date.getText().toString());
-        eventData = new Event(title.getText().toString(),about.getText().toString(),venue.getText().toString(),
-                date.getText().toString(),Config.club,time.getText().toString());
+      //  bookData = new Book(title.getText().toString(),about.getText().toString(),venue.getText().toString(),
+        //        about.getText().toString());
+
+        bookData = new Book(title.getText().toString(),about.getText().toString(),author.getText().toString(),stock.getText().toString(),given.getText().toString());
                 dbOperation = new DbOperation();
-        String response = dbOperation.create(eventData);
+        String response = dbOperation.create(bookData);
         if ( response.equals("s")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(),Config.club,Toast.LENGTH_SHORT);
             toast.show();
@@ -102,7 +102,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 
 
 
-
+/*
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
         int hour,minute;
@@ -113,7 +113,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
+            // Use the current available as the default values for the picker
             final Calendar c = Calendar.getInstance();
             if(hour ==-1 || minute == -1) {
                 hour = c.get(Calendar.HOUR_OF_DAY);
@@ -151,7 +151,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
+            // Use the current about as the default about in the picker
             final Calendar c = Calendar.getInstance();
                 year = c.get(Calendar.YEAR);
                 month = c.get(Calendar.MONTH);
@@ -167,5 +167,6 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
             dy=day;
                 date.setText(dy+"-"+mt+"-"+yr);
         }
-    }
+    }*/
+
   }

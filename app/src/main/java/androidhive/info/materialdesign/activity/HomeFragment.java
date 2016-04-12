@@ -18,7 +18,7 @@ import java.util.List;
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.adapter.EventAdapter;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 
 public class HomeFragment extends Fragment {
@@ -46,9 +46,9 @@ public class HomeFragment extends Fragment {
 
         listView = (ListView) rootView.findViewById(R.id.list);
 
-        dbOperation.getevents(getActivity());
+        dbOperation.getBooks(getActivity(),false);
 
-        List<Event> eventslist = DbOperation.events;
+        List<Book> eventslist = DbOperation.books;
         listView.setAdapter(new EventAdapter(getActivity(),eventslist));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,13 +61,13 @@ public class HomeFragment extends Fragment {
                 int itemPosition     = position;
 
                 // ListView Clicked item value
-                Event  itemValue    = (Event) listView.getItemAtPosition(position);
+                Book itemValue    = (Book) listView.getItemAtPosition(position);
 
                 // Show Alert
               //  Toast.makeText(view.getContext(),
-                //       "Event:  " + itemValue.getTitle()+"\nAbout:  "+itemValue.getAbout()+"\nDate:  "+itemValue.getDate(), Toast.LENGTH_LONG)
+                //       "Book:  " + itemValue.getTitle()+"\nAbout:  "+itemValue.getAbout()+"\nDate:  "+itemValue.getDate(), Toast.LENGTH_LONG)
                   //      .show();
-                Intent intent = new Intent(getActivity(),EventdetailActivity.class);
+                Intent intent = new Intent(getActivity(),BookdetailActivity.class);
                 intent.putExtra("EventDetail",itemValue);
                 startActivity(intent);
 

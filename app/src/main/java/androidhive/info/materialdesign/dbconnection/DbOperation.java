@@ -6,8 +6,6 @@ import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -21,18 +19,15 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 /**
  * Created by baratheraja on 22/7/15.
@@ -41,10 +36,10 @@ public class DbOperation {
     private ProgressDialog pdia;
     private Context context;
     ObjectMapper mapper = new ObjectMapper();
-    public static List<Event> events = new ArrayList<>();
+    public static List<Book> books = new ArrayList<>();
     private void seteventhelper(String response){
         try {
-            events = mapper.readValue(response, new TypeReference<List<Event>>() { });
+            books = mapper.readValue(response, new TypeReference<List<Book>>() { });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,13 +82,15 @@ public class DbOperation {
 
         @Override
         protected void onPostExecute(String result) {
-                Log.d("abc", result + "XYZ");
+            if(result.equals("success")) Toast.makeText(context,"Successfully Blocked",Toast.LENGTH_LONG).show();
+            else if(result.equals("blocked")) Toast.makeText(context,"Already Blocked",Toast.LENGTH_LONG).show();
+//            else Toast.makeText(context,"Error in Blocking",Toast.LENGTH_LONG).show();
         }
     }
 
-    private class GetEvent extends AsyncTask<String, Void, String> {
+    private class GetBook extends AsyncTask<String, Void, String> {
         List<NameValuePair> nameValuePairs;
-        private GetEvent() {
+        private GetBook() {
         }
 
         @Override
@@ -131,26 +128,25 @@ public class DbOperation {
 
 
             pdia.dismiss();
-            //Log.d("getting events",result+"XYZ");
+            //Log.d("getting books",result+"XYZ");
         }
     }
 
 
-    public String create(Event event) {
+    public String create(Book book) {
         //create post params
         List<NameValuePair> nameValuePairs =new ArrayList<>(4);
-        nameValuePairs.add(new BasicNameValuePair("title",event.getTitle()));
-        nameValuePairs.add(new BasicNameValuePair("about",event.getAbout()));
-        nameValuePairs.add(new BasicNameValuePair("venue",event.getVenue()));
-        nameValuePairs.add(new BasicNameValuePair("date",event.getDate()));
-        nameValuePairs.add(new BasicNameValuePair("club",event.getClub()));
-        nameValuePairs.add(new BasicNameValuePair("time",event.getTime()));
+        nameValuePairs.add(new BasicNameValuePair("title", book.getTitle()));
+        nameValuePairs.add(new BasicNameValuePair("about", book.getAbout()));
+        nameValuePairs.add(new BasicNameValuePair("author", book.getAuthor()));
+        nameValuePairs.add(new BasicNameValuePair("stock", book.getStock()));
+        nameValuePairs.add(new BasicNameValuePair("given", book.getGiven()));
 
         //sending post request
         try {
            PostEvent createEvent = new PostEvent(nameValuePairs);
-            //createEvent.execute(new String[] {"http://10.0.3.2/inceg/create.php"});
-            createEvent.execute(new String[] {"http://192.168.43.15/inceg/create.php"});
+            //createEvent.execute(new String[] {"http://192.168.43.126/inceg/create.php"});
+            createEvent.execute(new String[]{"http://192.168.43.126/inceg/create.php"});
             return "s";
         } catch (Exception e) {
             // Log exception
@@ -159,14 +155,18 @@ public class DbOperation {
         }
     }
 
-    public void getevents(Context context) {
+    public void getBooks(Context context,Boolean isAdmin) {
 
         this.context = context;
-        GetEvent getEvent = new GetEvent();
+        GetBook getBook = new GetBook();
         try {
-           // String resp= getEvent.execute(new String[] {"http://10.0.3.2/inceg/show.php"}).get();
-            String resp= getEvent.execute(new String[] {"http://192.168.43.15/inceg/show.php"}).get();
-
+           // String resp= getBook.execute(new String[] {"http://192.168.43.126/inceg/show.php"}).get();
+            String resp;
+            if(isAdmin) {
+                resp = getBook.execute(new String[]{"http://192.168.43.126/inceg/showall.php"}).get();
+            }else{
+                resp= getBook.execute(new String[] {"http://192.168.43.126/inceg/show.php"}).get();
+            }
             seteventhelper(resp);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -175,15 +175,31 @@ public class DbOperation {
         }
     }
 
-    public boolean deleteEvents(List<String> ids) {
+    public boolean blockBook(Context context,String id,String userid) {
+        this.context = context;d2 c
+        List<NameValuePair> nameValuePairs =new ArrayList<>();
+        nameValuePairs.add(new BasicNameValuePair("id",id));
+        nameValuePairs.add(new BasicNameValuePair("userid",userid));
+        try {
+            PostEvent createEvent = new PostEvent(nameValuePairs);
+            //createEvent.execute(new String[] {"http://192.168.43.126/inceg/delete.php"});
+            createEvent.execute(new String[] {"http://192.168.43.126/inceg/block.php"});
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+    public boolean deleteBooks(List<String> ids) {
         List<NameValuePair> nameValuePairs =new ArrayList<>();
         for(String id: ids) {
             nameValuePairs.add(new BasicNameValuePair("id[]",id));
         }
         try {
             PostEvent createEvent = new PostEvent(nameValuePairs);
-            //createEvent.execute(new String[] {"http://10.0.3.2/inceg/delete.php"});
-            createEvent.execute(new String[] {"http://192.168.43.15/inceg/delete.php"});
+            //createEvent.execute(new String[] {"http://192.168.43.126/inceg/delete.php"});
+            createEvent.execute(new String[] {"http://192.168.43.126/inceg/delete.php"});
             return true;
         } catch (Exception e) {
             e.printStackTrace();

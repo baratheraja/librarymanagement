@@ -13,7 +13,7 @@ import java.util.List;
 
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 /**
  * Created by baratheraja on 13/8/15.
@@ -21,8 +21,8 @@ import androidhive.info.materialdesign.model.Event;
 public class EventAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private static List<Event> eventlists;
-    public EventAdapter(Context eventFragment, List<Event> eventlist) {
+    private static List<Book> eventlists;
+    public EventAdapter(Context eventFragment, List<Book> eventlist) {
         mInflater = LayoutInflater.from(eventFragment);
         eventlists = eventlist;
     }
@@ -52,7 +52,7 @@ public class EventAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.event_item, null);
             holder = new ViewHolder();
             holder.txtname = (TextView) convertView.findViewById(R.id.name);
-            holder.txtdate = (TextView) convertView.findViewById(R.id.date);
+            holder.txtdate = (TextView) convertView.findViewById(R.id.book_about);
             holder.ckbox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             convertView.setTag(holder);
         } else {
@@ -60,14 +60,14 @@ public class EventAdapter extends BaseAdapter {
         }
 
         holder.txtname.setText(eventlists.get(position).getTitle());
-        holder.txtdate.setText(eventlists.get(position).getDate());
+        holder.txtdate.setText(eventlists.get(position).getAuthor());
         holder.ckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    DbOperation.events.get(position).setChecked(true);
+                    DbOperation.books.get(position).setChecked(true);
                 }
-                else DbOperation.events.get(position).setChecked(true);
+                else DbOperation.books.get(position).setChecked(true);
             }
         });
         return convertView;

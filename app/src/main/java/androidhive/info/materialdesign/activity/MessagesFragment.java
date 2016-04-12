@@ -1,10 +1,8 @@
 package androidhive.info.materialdesign.activity;
 
 import android.content.Intent;
-import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,7 @@ import java.util.List;
 
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 
 public class MessagesFragment extends Fragment {
@@ -46,17 +44,17 @@ public class MessagesFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_messages, container, false);
 
-        dbOperation.getevents(getActivity());
+        dbOperation.getBooks(getActivity(),false);
 
-        List<Event> eventslist = DbOperation.events;
+        List<Book> eventslist = DbOperation.books;
 
         String [] date;
         Calendar cal = Calendar.getInstance();
-        for(Event event: eventslist) {
-            date=event.getDate().split("-");
+       /* for(Book book : eventslist) {
+            date= book.getDate().split("-");
             cal.set(Integer.parseInt(date[2]),(-1+Integer.parseInt(date[1])),Integer.parseInt(date[0]));
             dates.add(cal.getTime());
-        }
+        }*/
 
         caldroidFragment = new CaldroidFragment();
         Bundle args = new Bundle();
@@ -85,11 +83,11 @@ public class MessagesFragment extends Fragment {
                 if(flag)
                 {
                     Intent intent = new Intent(getActivity(),EventonDateActivity.class);
-                    intent.putExtra("date",date);
+                    intent.putExtra("about",date);
                     startActivity(intent);
                 }
                 else
-                Toast.makeText(getActivity(), "No events on " + formatter.format(date),
+                Toast.makeText(getActivity(), "No books on " + formatter.format(date),
                         Toast.LENGTH_SHORT).show();
 
             }

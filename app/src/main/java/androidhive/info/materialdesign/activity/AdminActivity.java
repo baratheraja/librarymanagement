@@ -3,7 +3,6 @@ package androidhive.info.materialdesign.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,7 @@ import java.util.List;
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.adapter.EventAdapter;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 public class AdminActivity extends AppCompatActivity {
     SessionManager session;
@@ -37,9 +36,9 @@ public class AdminActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listadmin);
 
-        dbOperation.getevents(this);
+        dbOperation.getBooks(this,true);
 
-        List<Event> eventslist = DbOperation.events;
+        List<Book> eventslist = DbOperation.books;
         listView.setAdapter(new EventAdapter(this, eventslist));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,8 +47,8 @@ public class AdminActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Event itemValue = (Event) listView.getItemAtPosition(position);
-                Intent intent = new Intent(AdminActivity.this, EventdetailActivity.class);
+                Book itemValue = (Book) listView.getItemAtPosition(position);
+                Intent intent = new Intent(AdminActivity.this, BookdetailActivity.class);
                 intent.putExtra("EventDetail", itemValue);
                 startActivity(intent);
 
@@ -79,17 +78,21 @@ public class AdminActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_create) {
+            Intent intent = new Intent(this,BookActivity.class);
+            startActivity(intent);
+        }
         if(id == R.id.action_delete){
             int cntChoice =  listView.getCount();
             List<String> ids = new ArrayList<>();
-            Event event;
+            Book book;
             for(int i = 0; i < cntChoice; i++) {
-                event = DbOperation.events.get(i);
-                if(event.isChecked()) {
-                    ids.add(event.getId());
+                book = DbOperation.books.get(i);
+                if(book.isChecked()) {
+                    ids.add(book.getId());
                 }
             }
-            dbOperation.deleteEvents(ids);
+            dbOperation.deleteBooks(ids);
             Intent intent = getIntent();
             finish();
             startActivity(intent);

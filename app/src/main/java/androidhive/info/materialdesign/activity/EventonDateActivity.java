@@ -1,7 +1,6 @@
 package androidhive.info.materialdesign.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,33 +17,33 @@ import java.util.List;
 import androidhive.info.materialdesign.R;
 import androidhive.info.materialdesign.adapter.EventAdapter;
 import androidhive.info.materialdesign.dbconnection.DbOperation;
-import androidhive.info.materialdesign.model.Event;
+import androidhive.info.materialdesign.model.Book;
 
 public class EventonDateActivity extends AppCompatActivity {
 
     DbOperation dbOperation = new DbOperation();
-    List<Event> eventslist = new ArrayList<>();
+    List<Book> eventslist = new ArrayList<>();
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventon_date);
         Intent intent = getIntent();
-        Date datetodisplay = (Date) intent.getExtras().get("date");
+        Date datetodisplay = (Date) intent.getExtras().get("about");
         String date2 = datetodisplay.getDay()+"-"+datetodisplay.getMonth()+"-"+datetodisplay.getYear();
-        dbOperation.getevents(this);
-        List<Event> events = DbOperation.events;
+        dbOperation.getBooks(this,false);
+        List<Book> books = DbOperation.books;
         listView = (ListView) findViewById(R.id.listing);
         String [] date;
         Calendar cal = Calendar.getInstance();
-        for (Event event: events) {
-            date=event.getDate().split("-");
+       /* for (Book book : books) {
+            date= book.getDate().split("-");
             cal.set(Integer.parseInt(date[2]),(-1+Integer.parseInt(date[1])),Integer.parseInt(date[0]));
             Date temp = cal.getTime();
             if(datetodisplay.getDay() == temp.getDay() && datetodisplay.getMonth() == temp.getMonth() && datetodisplay.getYear() == temp.getYear()) {
-                eventslist.add(event);
+                eventslist.add(book);
             }
-        }
+        }*/
         listView.setAdapter(new EventAdapter(this, eventslist));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,13 +56,13 @@ public class EventonDateActivity extends AppCompatActivity {
                 int itemPosition     = position;
 
                 // ListView Clicked item value
-                Event  itemValue    = (Event) listView.getItemAtPosition(position);
+                Book itemValue    = (Book) listView.getItemAtPosition(position);
 
                 // Show Alert
                 //  Toast.makeText(view.getContext(),
-                //       "Event:  " + itemValue.getTitle()+"\nAbout:  "+itemValue.getAbout()+"\nDate:  "+itemValue.getDate(), Toast.LENGTH_LONG)
+                //       "Book:  " + itemValue.getTitle()+"\nAbout:  "+itemValue.getAbout()+"\nDate:  "+itemValue.getDate(), Toast.LENGTH_LONG)
                 //      .show();
-                Intent intent = new Intent(EventonDateActivity.this,EventdetailActivity.class);
+                Intent intent = new Intent(EventonDateActivity.this,BookdetailActivity.class);
                 intent.putExtra("EventDetail",itemValue);
                 startActivity(intent);
 

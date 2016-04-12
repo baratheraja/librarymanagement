@@ -11,8 +11,13 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_delete"
-        android:title="Delete Selected Events"
+        android:title="Delete Selected Books"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_create"
+        android:title="Create Book"
+        android:orderInCategory="100"
+        />
 
 </menu>

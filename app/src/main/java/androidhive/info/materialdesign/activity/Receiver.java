@@ -26,7 +26,7 @@ public class Receiver extends BroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(intent.getStringExtra("title"))
-                        .setContentText(intent.getStringExtra("detail"))
+                        .setContentText(intent.getStringExtra("author"))
                         .setDefaults(Notification.DEFAULT_SOUND);
         Intent resultIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
